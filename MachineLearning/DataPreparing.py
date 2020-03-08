@@ -34,4 +34,3 @@ df[df.duplicated()]  # Rows containing duplicate data
 half_count = len(df) / 2
 df = df.dropna(thresh=half_count,axis=1) # Drop any column with more than 50% missing values
 
-
