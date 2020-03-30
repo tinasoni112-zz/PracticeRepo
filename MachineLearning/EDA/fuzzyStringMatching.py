@@ -14,8 +14,7 @@ def calc_token_set_ratio(str1, str2):
     from fuzzywuzzy import fuzz
     return fuzz.token_set_ratio(str1, str2)
 
-def match_ratio_for_column(data, col):
-    dat
+
 
 
 

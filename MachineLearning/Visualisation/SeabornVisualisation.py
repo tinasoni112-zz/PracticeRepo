@@ -1,7 +1,6 @@
 def plot_heatmap(corr_matrix, size = 20):
     import matplotlib.pyplot as plt
     import seaborn as sns
-    import numpy as np
 
     fig, ax = plt.subplots(figsize=(size, size))
     sns.heatmap(corr_matrix, annot=True,ax=ax)
