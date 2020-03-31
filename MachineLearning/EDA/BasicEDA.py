@@ -1,15 +1,19 @@
 # Read Excel file
-def readExcel(filepath, index_col = None ):
+def read_Excel(filepath, index_col = None ):
     import pandas as pd
     data = pd.read_excel(filepath, index_col = index_col)
     return data
 
 # Read CSV file
-def readCSV(filepath, index_col = None ):
+def read_CSV(filepath, index_col = None ):
     import pandas as pd
     data = pd.read_csv(filepath)
     return data
 
+# Read current path
+def get_current_path():
+    import os
+    return os.getcwd()
 
 # print summary info of data
 def basic_data_summary(data):
@@ -63,6 +67,9 @@ def linear_model_summary(X,y):
 def drop_columns_null_values(data, cols):
     data.dropna(subset=cols, inplace = True, how='any', axis =1)
 
+# Get columns having null values
+def fetch_null_columns(data):
+    return data.columns[data.isnull().any()].tolist()
 
 def drop_columns(data, col):
     return data.drop(col, axis = 1)
@@ -70,7 +77,7 @@ def drop_columns(data, col):
 
 def dummy_variables_pd(data,col):
     import pandas as pd
-    encoded_data = pd.get_dummies(data[col], prefix=col)
+    encoded_data = pd.get_dummies(data[col], prefix=col, drop_first=True)
     return encoded_data
 
 def fetch_categories(data, col):
@@ -111,7 +118,7 @@ def get_object_data(data):
     import numpy as np
     return data.select_dtypes(include=np.object)
 
-def create_dataframe():
+def create_empty_dataframe():
     import pandas as pd
     return pd.DataFrame()
 
@@ -128,7 +135,19 @@ def fetch_data_by_index(data,index_list):
 def fetch_index_by_value(data,col, value):
     return data[data[col]== value].index
 
-def create_dataframe_from_array(array,colname):
+def create_dataframe_prefix_colname(array,colname):
     import pandas as pd
     colnames = [colname + str(i + 1) for i in range(array.shape[1])]
     return pd.DataFrame(data=array, columns=colnames)
+
+def create_dataframe(array,colnames):
+    import pandas as pd
+    return pd.DataFrame(data=array, columns=colnames)
+
+# fill missing values with mean column values
+def fillna_using_mean(data):
+    return data.fillna(data.mean())
+
+# fetch columns of category type
+def fetch_cat_columns(data):
+    return  data.select_dtypes(include=['object','category']).columns.values.tolist()

@@ -1,9 +1,9 @@
-from BasicEDA import *
+from PracticeRepo.MachineLearning.EDA.BasicEDA import *
 
 def label_encoding(data,col):
     from sklearn.preprocessing import LabelEncoder
     labelencoder = LabelEncoder()
-    encoded_data = labelencoder.fit_transform(data[col])
+    encoded_data = labelencoder.fit_transform(data.loc[:,col])
     return encoded_data
 
 def dummy_variables_one_hot_encode(data,col):
@@ -27,9 +27,9 @@ def sklearn_linear_model(X,y):
     return model
 
 
-def sklearn_train_test_split(X,y):
+def sklearn_train_test_split(X,y,test_size=0.2):
     from sklearn.model_selection import train_test_split
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
     return X_train, X_test, y_train, y_test
 
 def pca_sklearn (data,n_components=None):
@@ -51,3 +51,14 @@ def calc_purity_cluster(y_actual, y_predict):
 
     contingency_matrix = contingency_matrix(y_actual, y_predict)
     return np.sum(np.amax(contingency_matrix, axis=0)) / np.sum(contingency_matrix)
+
+
+def imputer_sklearn(data, cols):
+    from sklearn.impute import SimpleImputer
+    imputer = SimpleImputer()
+    return imputer.fit_transform(data.loc[:,cols])
+
+def scaler_sklearn(data):
+    from sklearn.preprocessing import StandardScaler
+    scaler = StandardScaler()
+    return scaler.fit_transform(data)
