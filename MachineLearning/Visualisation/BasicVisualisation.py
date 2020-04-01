@@ -11,11 +11,11 @@ def plot_freq_histogram(data, figsize=None, title = None):
     plt.hist(data,figsize=figsize)
     plt.title(title)
 
-def plot_actual_vs_predict(y_test, y_predict):
+def plot_actual_vs_predict(x_actual , y_actual , y_predict):
     import matplotlib.pyplot as plt
-    plt.scatter(y_test, y_predict)
-    plt.plot(y_test, y_predict, color='blue')
-    plt.xlabel("True Values")
-    plt.ylabel("Predictions")
+    plt.scatter(x_actual, y_actual, color = 'red')
+    plt.plot(x_actual, y_predict, color = 'blue')
+    plt.xlabel(x_actual.columns.values[0])
+    plt.ylabel(y_actual.columns.values[0])
 
 
