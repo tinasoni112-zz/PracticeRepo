@@ -3,7 +3,7 @@ from PracticeRepo.MachineLearning.EDA.BasicEDA import *
 from PracticeRepo.MachineLearning.EDA.sklearnEDA import *
 
 # Import Datasets
-filePath = r'C:\Users\sonitina\PycharmProjects\Kaggle\PracticeRepo\MachineLearning\Templates\SampleData\Preprocessing_Data.csv'
+filePath = r'SampleData\Preprocessing_Data.csv'
 data = read_CSV(filePath)
 
 # Define Target Variable

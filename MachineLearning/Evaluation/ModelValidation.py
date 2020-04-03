@@ -12,3 +12,12 @@ def calc_rmse(y_actual, y_predicted):
     from math import sqrt
     rmse = sqrt(mean_squared_error(y_actual, y_predicted))
     return rmse
+
+def highest_pvalue_column(statsmodel, sign_level = 0.05):
+    highest_p_value_col = None
+    pvalues = statsmodel.pvalues
+    highest_p_value = max(pvalues)
+    if(highest_p_value > sign_level):
+        highest_p_value_col = pvalues[pvalues == highest_p_value].index.values[0]
+    return highest_p_value_col
+

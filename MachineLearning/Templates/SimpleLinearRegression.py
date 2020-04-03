@@ -4,13 +4,14 @@ from PracticeRepo.MachineLearning.EDA.sklearnEDA import *
 from PracticeRepo.MachineLearning.Models.RegressionModels import *
 from PracticeRepo.MachineLearning.Visualisation.BasicVisualisation import *
 
+# Step to reload the module
 import PracticeRepo.MachineLearning.Models.RegressionModels as mymodule
 import importlib
 importlib.reload(mymodule)
 
 # PreProcess data
 # Import Datasets
-filePath = r'C:\Users\sonitina\PycharmProjects\Kaggle\PracticeRepo\MachineLearning\Templates\SampleData\Simple_Linear_Regression_Data.csv'
+filePath = r'SampleData\Simple_Linear_Regression_Data.csv'
 data = read_CSV(filePath)
 
 # Define Target Variable
@@ -22,7 +23,7 @@ X,y = divide_X_and_y(data=data, target=target)
 # split the data into train and test
 X_train, X_test, y_train, y_test = sklearn_train_test_split(X,y,test_size=1/3)
 
-# Fitting simple linear regression on training set and predict on test set
+# Fitting linear regression on training set and predict on test set
 model, y_predict = simple_linear_regression_sklearn(X_train, y_train, X_test)
 
 # Visualise the training set results

@@ -151,3 +151,9 @@ def fillna_using_mean(data):
 # fetch columns of category type
 def fetch_cat_columns(data):
     return  data.select_dtypes(include=['object','category']).columns.values.tolist()
+
+# Add constant column having values as one at starting of array
+def add_constant_column_ones_array(data_array):
+    import numpy as np
+    data_array = np.append(arr =np.ones((50,1)).astype(int), values=data_array, axis=1)
+    return data_array
