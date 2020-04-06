@@ -62,3 +62,8 @@ def scaler_sklearn(data):
     from sklearn.preprocessing import StandardScaler
     scaler = StandardScaler()
     return scaler.fit_transform(data)
+
+def polynomial_features_sklearn(data, n_degree = 2):
+    from sklearn.preprocessing import PolynomialFeatures
+    poly_reg = PolynomialFeatures(degree = n_degree)
+    return poly_reg.fit_transform(data)

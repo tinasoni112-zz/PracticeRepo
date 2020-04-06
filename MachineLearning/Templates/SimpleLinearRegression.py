@@ -24,7 +24,8 @@ X,y = divide_X_and_y(data=data, target=target)
 X_train, X_test, y_train, y_test = sklearn_train_test_split(X,y,test_size=1/3)
 
 # Fitting linear regression on training set and predict on test set
-model, y_predict = simple_linear_regression_sklearn(X_train, y_train, X_test)
+model = linear_regression_sklearn(X_train, y_train)
+y_predict = regressor_prediction(model, X_test)
 
 # Visualise the training set results
 plot_actual_vs_predict(X_train, y_train, model.predict(X_train))

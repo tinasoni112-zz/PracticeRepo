@@ -13,7 +13,7 @@ importlib.reload(mymodule)
 
 # PreProcess data
 # Import Datasets
-filePath = r'SampleData\MultipleLinearRegression.csv'
+filePath = r'SampleData\Multiple_Linear_Regression_Data.csv'
 data = read_CSV(filePath)
 
 # Define Target Variable
@@ -37,7 +37,8 @@ X = concat_df(X,dummy_variables_df)
 X_train, X_test, y_train, y_test = sklearn_train_test_split(X,y)
 
 # Fitting  linear regression on training set and predict on test set
-model, y_predict = linear_regression_sklearn(X_train, y_train, X_test)
+model = linear_regression_sklearn(X_train, y_train)
+y_predict = regressor_prediction(X_test)
 
 # Build the optimal model using Backward elimination
 # Model with all predictors

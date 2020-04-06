@@ -1,5 +1,8 @@
-def linear_regression_sklearn(X_train,y_train,X_test):
+def linear_regression_sklearn(X_actual, y_actual):
     from sklearn.linear_model import LinearRegression
-    regressor = LinearRegression().fit(X_train,y_train)
-    y_predict = regressor.predict(X_test)
-    return regressor, y_predict
+    regressor = LinearRegression().fit(X_actual, y_actual)
+    return regressor
+
+def regressor_prediction(regressor, X_actual):
+    y_predict = regressor.predict(X_actual)
+    return y_predict
