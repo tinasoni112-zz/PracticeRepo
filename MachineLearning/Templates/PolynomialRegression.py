@@ -28,7 +28,7 @@ cat_col = fetch_cat_columns(X)
 X = drop_columns(X, cat_col)
 
 # Create polynomial matrix for X
-X_poly = polynomial_features_sklearn(X, n_degree=4)
+X_poly = sklearn_polynomial_features(X, n_degree=4)
 
 # Fitting linear regression on polynomial matrix
 model = linear_regression_sklearn(X_poly ,y)

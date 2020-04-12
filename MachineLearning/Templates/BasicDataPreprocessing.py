@@ -29,11 +29,11 @@ X = drop_columns(X,category_cols)
 X = concat_df(X,dummy_variables_df)
 
 # Convert labels as integer in target column
-y[target] = label_encoding(y,target)
+y = sklearn_label_encoding(y, target)
 
 # split the data into train and test
 X_train, X_test, y_train, y_test = sklearn_train_test_split(X,y)
 
 # Feature Scaling
-X_train = create_dataframe(scaler_sklearn(X_train),X_train.columns.values)
-X_test = create_dataframe(scaler_sklearn(X_test),X_test.columns.values)
+X_train = create_dataframe(sklearn_scaler(X_train), X_train.columns.values)
+X_test = create_dataframe(sklearn_scaler(X_test), X_test.columns.values)

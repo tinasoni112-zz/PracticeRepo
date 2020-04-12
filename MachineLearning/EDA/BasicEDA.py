@@ -7,7 +7,7 @@ def read_Excel(filepath, index_col = None ):
 # Read CSV file
 def read_CSV(filepath, index_col = None ):
     import pandas as pd
-    data = pd.read_csv(filepath)
+    data = pd.read_csv(filepath, index_col=index_col)
     return data
 
 # Read current path
@@ -34,11 +34,11 @@ def list_numeric_cols(data):
 
 def convert_col_to_date(data,col,format):
     import pandas as pd
-    data[col+'_convert'] = pd.to_datetime(data[col], format=format,errors='coerce')
+    data[col] = pd.to_datetime(data[col], format=format,errors='coerce')
 
 def convert_col_to_category(data, *cols):
     for col in cols:
-        data[col+'_convert'] = data[col].astype('category')
+        data[col] = data[col].astype('category')
 
 # filter dataframe on column names regex
 def filter_dataframe(data, col_regex):
@@ -65,7 +65,10 @@ def linear_model_summary(X,y):
     return model.summary()
 
 def drop_columns_null_values(data, cols):
-    data.dropna(subset=cols, inplace = True, how='any', axis =1)
+    return data.dropna(subset=cols,  axis = 1)
+
+def drop_rows_null_values(data, cols):
+    return data.dropna(subset=cols,  axis = 0)
 
 # Get columns having null values
 def fetch_null_columns(data):
@@ -73,6 +76,13 @@ def fetch_null_columns(data):
 
 def drop_columns(data, col):
     return data.drop(col, axis = 1)
+
+def split_date_column(data, datecol):
+    data[datecol+'_Day'] = data[datecol].dt.day
+    data[datecol+'_Month'] = data[datecol].dt.month
+    data[datecol+'_Year'] = data[datecol].dt.year
+    data[datecol+'_Quarter'] = data[datecol].dt.quarter
+
 
 
 def dummy_variables_pd(data,col):
@@ -103,6 +113,11 @@ def calc_corr_matrix(data):
 def concat_df(X,y):
     import pandas as pd
     df = pd.concat([X, y], axis=1)
+    return df
+
+def concat_df_by_row(X,y):
+    import pandas as pd
+    df = pd.concat([X, y], axis=0)
     return df
 
 def apply_log(data, col):
@@ -152,8 +167,26 @@ def fillna_using_mean(data):
 def fetch_cat_columns(data):
     return  data.select_dtypes(include=['object','category']).columns.values.tolist()
 
+# fetch columns of category type
+def fetch_numeric_columns(data):
+    return  data.select_dtypes(exclude=['object','category']).columns.values.tolist()
+
 # Add constant column having values as one at starting of array
 def add_constant_column_ones_array(data_array):
     import numpy as np
     data_array = np.append(arr =np.ones((50,1)).astype(int), values=data_array, axis=1)
     return data_array
+
+def get_good_label_cols(X_train, X_test, cols):
+    return [col for col in cols if set(X_train[col]) == set(X_test[col])]
+
+def subtract_cols(full_cols, subset_cols):
+    return list(set(full_cols) - set(subset_cols))
+
+def create_unique_value_dict(data, cols):
+    list_nunique = list(map(lambda col: data[col].nunique(), cols))
+    dict_unique = dict(zip(cols, list_nunique))
+    return sorted(dict_unique.items(), key=lambda x: x[1])
+
+def fetch_low_cardinality_cols(data, cols, threshold = 10):
+    return [col for col in cols if data[col].nunique() < threshold]

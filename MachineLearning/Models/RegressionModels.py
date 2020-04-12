@@ -6,3 +6,9 @@ def linear_regression_sklearn(X_actual, y_actual):
 def regressor_prediction(regressor, X_actual):
     y_predict = regressor.predict(X_actual)
     return y_predict
+
+def random_forest_regressor_sklearn(X_actual, y_actual,n_estimators = 100, random_state = 0):
+    from sklearn.ensemble import RandomForestRegressor
+    regressor = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
+    regressor.fit(X_actual,y_actual.iloc[:,0])
+    return regressor
