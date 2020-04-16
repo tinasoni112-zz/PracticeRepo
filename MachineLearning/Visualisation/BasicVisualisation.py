@@ -18,4 +18,8 @@ def plot_actual_vs_predict(x_actual , y_actual , y_predict):
     plt.xlabel(x_actual.columns.values[0])
     plt.ylabel(y_actual.columns.values[0])
 
+def plot_line_graph(X, Y):
+    import matplotlib.pyplot as plt
+    plt.plot(X,Y)
+
 

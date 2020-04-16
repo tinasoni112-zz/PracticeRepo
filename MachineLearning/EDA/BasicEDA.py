@@ -188,5 +188,9 @@ def create_unique_value_dict(data, cols):
     dict_unique = dict(zip(cols, list_nunique))
     return sorted(dict_unique.items(), key=lambda x: x[1])
 
+def create_dict_from_list(list1,list2):
+    dict_from_list = dict(zip(list1, list2))
+    return dict_from_list
+
 def fetch_low_cardinality_cols(data, cols, threshold = 10):
     return [col for col in cols if data[col].nunique() < threshold]
