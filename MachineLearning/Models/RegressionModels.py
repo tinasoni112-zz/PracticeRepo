@@ -12,3 +12,10 @@ def random_forest_regressor_sklearn(X_actual, y_actual,n_estimators = 100, rando
     regressor = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
     regressor.fit(X_actual,y_actual.iloc[:,0])
     return regressor
+
+
+def XGB_regressor(X_actual, y_actual, n_estimators = 500, learning_rate=0.05, n_jobs=4):
+    from xgboost import XGBRegressor
+    regressor = XGBRegressor()
+    regressor.fit(X_actual,y_actual)
+    return regressor

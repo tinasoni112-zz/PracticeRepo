@@ -152,5 +152,8 @@ regressor = random_forest_regressor_sklearn(X_train_final_oh, y_train)
 print(calc_mae(y_valid, regressor_prediction(regressor,X_valid_final_oh)))
 # 16506.65732876712
 
+# Using XGBRegressor
+xgb_regressor = XGB_regressor(X_train_final_oh, y_train)
+print(calc_mae(y_valid, regressor_prediction(xgb_regressor,X_valid_final_oh)))
 
 
