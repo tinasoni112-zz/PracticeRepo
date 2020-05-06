@@ -5,9 +5,9 @@ def read_Excel(filepath, index_col = None ):
     return data
 
 # Read CSV file
-def read_CSV(filepath, index_col = None ):
+def read_CSV(filepath, index_col = None, date_cols = None ):
     import pandas as pd
-    data = pd.read_csv(filepath, index_col=index_col)
+    data = pd.read_csv(filepath, index_col=index_col, parse_dates = date_cols)
     return data
 
 # Read current path
@@ -84,6 +84,11 @@ def split_date_column(data, datecol):
     data[datecol+'_Quarter'] = data[datecol].dt.quarter
 
 
+def split_time_column(data, datecol):
+    data[datecol+'_Day'] = data[datecol].dt.day
+    data[datecol+'_Hour'] = data[datecol].dt.hour
+    data[datecol+'_Minute'] = data[datecol].dt.minute
+    data[datecol+'_Second'] = data[datecol].dt.second
 
 def dummy_variables_pd(data,col):
     import pandas as pd
@@ -164,7 +169,7 @@ def fillna_using_mean(data):
     return data.fillna(data.mean())
 
 # fetch columns of category type
-def fetch_cat_columns(data):
+def  fetch_cat_columns(data):
     return  data.select_dtypes(include=['object','category']).columns.values.tolist()
 
 # fetch columns of category type
@@ -194,3 +199,49 @@ def create_dict_from_list(list1,list2):
 
 def fetch_low_cardinality_cols(data, cols, threshold = 10):
     return [col for col in cols if data[col].nunique() < threshold]
+
+def fetch_unique_values(data):
+    import pandas as pd
+    return pd.unique(data)
+
+def fetch_groupby_count(data, groubyCol, countCol):
+    return data.groupby(groubyCol)[countCol].count()
+
+def filter_data_by_col_value(data, column, value):
+    return data.query('column != value')
+
+def assign_binary_value_to_col(data, filterCol, filterVal, targetCol):
+    return data.assign(targetCol=(data[filterCol]== filterVal).astype(int))
+
+def join_dataframe(df1, df2):
+    return df1.join(df2)
+
+def apply_function(data, function):
+    return data.apply(function)
+
+def divide_train_valid_test_data(data, valid_fraction=0.1):
+    valid_size = int(len(data) * valid_fraction)
+    train = data[:-2 * valid_size]
+    valid = data[-2*valid_size : -valid_size]
+    test = data[-valid_size:]
+    return train, valid, test
+
+def  fetch_feature_columns(data,target):
+    return  data.columns.drop(target).tolist()
+
+def combination_of_list(list, tuple_size = 2):
+    import itertools
+    all_combination = itertools.combinations(list, tuple_size)
+    return all_combination
+
+def join_dataframes(df1, df2):
+    return df1.join(df2)
+
+def count_past_events(series, timeline):
+    import pandas as pd
+    past_events = pd.Series(series.index, index = series, name="past_events").sort_index()
+    past_timeline_events  = past_events.rolling(timeline).count()
+    return past_timeline_events
+
+
+

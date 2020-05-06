@@ -26,3 +26,7 @@ def calc_mae(y_actual, y_predict):
     mae = mean_absolute_error(y_actual, y_predict)
     return mae
 
+def calc_roc_auc_score(y_actual, y_predict):
+    from sklearn.metrics import roc_auc_score
+    auc_score = roc_auc_score(y_actual, y_predict)
+    return auc_score
