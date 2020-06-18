@@ -64,7 +64,7 @@ def sklearn_imputer(data, strategy='mean'):
 def sklearn_scaler(data):
     from sklearn.preprocessing import StandardScaler
     scaler = StandardScaler()
-    return scaler.fit_transform(data)
+    return scaler.fit_transform(data), scaler
 
 def sklearn_polynomial_features(data, n_degree = 2):
     from sklearn.preprocessing import PolynomialFeatures

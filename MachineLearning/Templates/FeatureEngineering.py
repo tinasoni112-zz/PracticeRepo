@@ -27,7 +27,7 @@ data['ip'].describe()
 
 # Handle missing data - drop it as its one column with 80 percent null values
 null_columns = fetch_null_columns(data)
-data = drop_columns(data, null_columns)
+data =  drop_columns(data, null_columns)
 
 # Add new columns for timestamp features day, hour, minute, and second and drop date column
 for date in date_cols:

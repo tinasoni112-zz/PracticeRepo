@@ -30,3 +30,9 @@ def calc_roc_auc_score(y_actual, y_predict):
     from sklearn.metrics import roc_auc_score
     auc_score = roc_auc_score(y_actual, y_predict)
     return auc_score
+
+def classification_report(y_actual, y_predict):
+    from sklearn.metrics import classification_report
+    report = classification_report(y_actual, y_predict)
+    return report
+

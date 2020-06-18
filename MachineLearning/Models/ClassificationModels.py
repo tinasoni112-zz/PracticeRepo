@@ -15,7 +15,7 @@ def SVC_Model(X_train,y_train,X_test):
 # KNN (k-nearest neighbours) classifier
 def KNeighborsClassifier_Model(X_train,y_train,X_test) :
     from sklearn.neighbors import KNeighborsClassifier
-    knn = KNeighborsClassifier(n_neighbors = 7).fit(X_train, y_train)
+    knn = KNeighborsClassifier().fit(X_train, y_train)
     y_predict = knn.predict(X_test)
     return y_predict, knn
 
@@ -54,10 +54,3 @@ def lightgbm_model(train, valid, test, target, param = None, num_round = 1000, e
     bst = lgb.train(param, dtrain, num_round, valid_sets=[dvalid], early_stopping_rounds = early_stopping_rounds)
     y_predict = bst.predict(test[feature_cols])
     return y_predict, bst
-
-
-
-
-
-
-

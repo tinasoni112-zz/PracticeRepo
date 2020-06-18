@@ -22,3 +22,13 @@ def plot_histogram(data, figsize=(10, 10)):
     import matplotlib.pyplot as plt
     plt.figure(figsize=figsize)
     sns.distplot(data)
+
+def plot_catplot(data, x, y , kind = "boxen",color="k"):
+    import seaborn as sns
+    sns.catplot(x=x, y=y, kind=kind, data=data,color=color)
+
+
+def plot_swarmplot(data, x, y, color="k"):
+    import seaborn as sns
+    sns.swarmplot(x=x, y=y, data=data, color=color)
+

@@ -5,9 +5,9 @@ def read_Excel(filepath, index_col = None ):
     return data
 
 # Read CSV file
-def read_CSV(filepath, index_col = None, date_cols = None ):
+def read_CSV(filepath, index_col = None, date_cols = None, names = None ):
     import pandas as pd
-    data = pd.read_csv(filepath, index_col=index_col, parse_dates = date_cols)
+    data = pd.read_csv(filepath, index_col=index_col, parse_dates = date_cols, names=names)
     return data
 
 # Read current path
@@ -242,6 +242,10 @@ def count_past_events(series, timeline):
     past_events = pd.Series(series.index, index = series, name="past_events").sort_index()
     past_timeline_events  = past_events.rolling(timeline).count()
     return past_timeline_events
+
+def set_index_of_df(data, col, inplace = False) :
+    return data.set_index(col, inplace=inplace)
+
 
 
 
