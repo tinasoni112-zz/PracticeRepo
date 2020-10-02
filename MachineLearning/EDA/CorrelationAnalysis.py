@@ -1,9 +1,11 @@
+def calc_corr_matrix(data):
+    return data.corr()
+
 def get_top_abs_correlations(corr_matrix, n=5):
     au_corr = corr_matrix.abs().unstack()
     labels_to_drop = get_redundant_pairs(df)
     au_corr = au_corr.drop(labels=labels_to_drop).sort_values(ascending=False)
     return au_corr[0:n]
-
 
 def get_redundant_pairs(df):
     '''Get diagonal and lower triangular pairs of correlation matrix'''

@@ -1,30 +1,8 @@
-# Read Excel file
-def read_Excel(filepath, index_col = None ):
-    import pandas as pd
-    data = pd.read_excel(filepath, index_col = index_col)
-    return data
-
-# Read CSV file
-def read_CSV(filepath, index_col = None, date_cols = None, names = None ):
-    import pandas as pd
-    data = pd.read_csv(filepath, index_col=index_col, parse_dates = date_cols, names=names)
-    return data
-
-# Read current path
-def get_current_path():
-    import os
-    return os.getcwd()
-
 # print summary info of data
 def basic_data_summary(data):
     print(data.info())
     desribe_data = data.describe(include = "all")
     return desribe_data
-
-def divide_X_and_y(data, target):
-    X = data.loc[:, data.columns != target]
-    y = data.loc[:, data.columns == target]
-    return X,y
 
 # list numeric columns
 def list_numeric_cols(data):
@@ -32,13 +10,6 @@ def list_numeric_cols(data):
     numeric_cols = data.select_dtypes([np.number]).columns.values
     return numeric_cols
 
-def convert_col_to_date(data,col,format):
-    import pandas as pd
-    data[col] = pd.to_datetime(data[col], format=format,errors='coerce')
-
-def convert_col_to_category(data, *cols):
-    for col in cols:
-        data[col] = data[col].astype('category')
 
 # filter dataframe on column names regex
 def filter_dataframe(data, col_regex):
@@ -48,13 +19,6 @@ def filter_dataframe(data, col_regex):
 def update_column_names(data, col_regex):
     data.columns = data.columns.str.replace(col_regex,'')
 
-# check null values in dataframe
-def check_null_values(data):
-    return data.isnull().sum()
-
-# check null values percentage in dataframe
-def check_null_percentage(data):
-    return data.isnull().sum()/len(data) * 100
 
 def sort_values_df(data):
     data.sort_values(inplace=True)
@@ -64,31 +28,9 @@ def linear_model_summary(X,y):
     model = sm.OLS(y,X).fit()
     return model.summary()
 
-def drop_columns_null_values(data, cols):
-    return data.dropna(subset=cols,  axis = 1)
-
-def drop_rows_null_values(data, cols):
-    return data.dropna(subset=cols,  axis = 0)
-
-# Get columns having null values
-def fetch_null_columns(data):
-    return data.columns[data.isnull().any()].tolist()
-
 def drop_columns(data, col):
     return data.drop(col, axis = 1)
 
-def split_date_column(data, datecol):
-    data[datecol+'_Day'] = data[datecol].dt.day
-    data[datecol+'_Month'] = data[datecol].dt.month
-    data[datecol+'_Year'] = data[datecol].dt.year
-    data[datecol+'_Quarter'] = data[datecol].dt.quarter
-
-
-def split_time_column(data, datecol):
-    data[datecol+'_Day'] = data[datecol].dt.day
-    data[datecol+'_Hour'] = data[datecol].dt.hour
-    data[datecol+'_Minute'] = data[datecol].dt.minute
-    data[datecol+'_Second'] = data[datecol].dt.second
 
 def dummy_variables_pd(data,col):
     import pandas as pd
@@ -112,8 +54,6 @@ def flatmap_list_of_df(df) :
     final_df = pd.concat(df)
     return final_df
 
-def calc_corr_matrix(data):
-    return data.corr()
 
 def concat_df(X,y):
     import pandas as pd
@@ -125,14 +65,10 @@ def concat_df_by_row(X,y):
     df = pd.concat([X, y], axis=0)
     return df
 
-def apply_log(data, col):
-    import numpy as np
-    return np.log(data[col]+1)
 
 def get_numeric_data(data):
     import numpy as np
     return data.select_dtypes(include=np.number)
-
 
 def get_object_data(data):
     import numpy as np
@@ -141,10 +77,6 @@ def get_object_data(data):
 def create_empty_dataframe():
     import pandas as pd
     return pd.DataFrame()
-
-def apply_exp(data):
-    import numpy as np
-    return np.exp(data)
 
 def fetch_unique_values(data,col):
     return data[col].unique().tolist()
@@ -164,9 +96,6 @@ def create_dataframe(array,colnames):
     import pandas as pd
     return pd.DataFrame(data=array, columns=colnames)
 
-# fill missing values with mean column values
-def fillna_using_mean(data):
-    return data.fillna(data.mean())
 
 # fetch columns of category type
 def  fetch_cat_columns(data):
@@ -219,13 +148,6 @@ def join_dataframe(df1, df2):
 def apply_function(data, function):
     return data.apply(function)
 
-def divide_train_valid_test_data(data, valid_fraction=0.1):
-    valid_size = int(len(data) * valid_fraction)
-    train = data[:-2 * valid_size]
-    valid = data[-2*valid_size : -valid_size]
-    test = data[-valid_size:]
-    return train, valid, test
-
 def  fetch_feature_columns(data,target):
     return  data.columns.drop(target).tolist()
 
@@ -237,15 +159,11 @@ def combination_of_list(list, tuple_size = 2):
 def join_dataframes(df1, df2):
     return df1.join(df2)
 
-def count_past_events(series, timeline):
-    import pandas as pd
-    past_events = pd.Series(series.index, index = series, name="past_events").sort_index()
-    past_timeline_events  = past_events.rolling(timeline).count()
-    return past_timeline_events
-
 def set_index_of_df(data, col, inplace = False) :
     return data.set_index(col, inplace=inplace)
 
+def print_value_counts(data, col):
+    return data[col].value_counts()
 
 
 
