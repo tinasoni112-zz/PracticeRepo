@@ -9,8 +9,8 @@ def regressor_prediction(regressor, X_actual):
 
 def random_forest_regressor_sklearn(X_actual, y_actual,n_estimators = 100, random_state = 0):
     from sklearn.ensemble import RandomForestRegressor
-    regressor = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
-    regressor.fit(X_actual,y_actual.iloc[:,0])
+    regressor = RandomForestRegressor()
+    # regressor.fit(X_actual,y_actual.iloc[:,0])
     return regressor
 
 

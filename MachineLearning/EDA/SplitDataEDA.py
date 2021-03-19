@@ -11,7 +11,6 @@ def split_date_column(data, datecol):
 
 
 def split_time_column(data, datecol):
-    data[datecol+'_Day'] = data[datecol].dt.day
     data[datecol+'_Hour'] = data[datecol].dt.hour
     data[datecol+'_Minute'] = data[datecol].dt.minute
     data[datecol+'_Second'] = data[datecol].dt.second

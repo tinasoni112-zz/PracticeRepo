@@ -151,6 +151,9 @@ def apply_function(data, function):
 def  fetch_feature_columns(data,target):
     return  data.columns.drop(target).tolist()
 
+def  fetch_all_columns(data):
+    return  data.columns.tolist()
+
 def combination_of_list(list, tuple_size = 2):
     import itertools
     all_combination = itertools.combinations(list, tuple_size)
@@ -164,6 +167,10 @@ def set_index_of_df(data, col, inplace = False) :
 
 def print_value_counts(data, col):
     return data[col].value_counts()
+
+def get_progress_bar():
+    from tqdm.notebook import tqdm
+    tqdm.pandas()
 
 
 

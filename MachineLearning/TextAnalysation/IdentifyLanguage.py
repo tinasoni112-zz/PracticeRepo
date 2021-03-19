@@ -7,9 +7,17 @@ def detect_language_using_langdetect(text):
     try:
         return detect(text)
     except:
-        return 'Unknown'
+        return None
 
 def isocode_to_langname(isocode):
     import pycountry
     lang = pycountry.languages.get(alpha_2=isocode)
     return lang.name
+
+def detect_language_using_googletrans(text):
+    from googletrans import Translator
+    translator = Translator()
+    try:
+        return translator.detect(text).lang
+    except:
+        return None
